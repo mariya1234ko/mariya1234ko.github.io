@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Google Calendar 이벤트 관리</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/react-datepicker/4.8.0/react-datepicker.min.css">
+</head>
+<body>
+
+<div class="container mt-5">
+  <h1>Google Calendar 이벤트 관리</h1>
+  <div id="auth-buttons">
+    <button id="google-login" class="btn btn-primary">구글 로그인</button>
+    <button id="google-logout" class="btn btn-danger" style="display:none;">로그아웃</button>
+  </div>
+
+  <div id="event-form" style="display:none;">
+    <h2>이벤트 등록</h2>
+    <div class="form-group">
+      <label for="event-title">이벤트 제목</label>
+      <input type="text" id="event-title" class="form-control" />
+    </div>
+
+    <div class="form-group">
+      <label for="start-date">시작일</label>
+      <input type="date" id="start-date" class="form-control" />
+    </div>
+
+    <div class="form-group">
+      <label for="end-date">마지막일</label>
+      <input type="date" id="end-date" class="form-control" />
+    </div>
+
+    <div class="form-group">
+      <label>요일 선택</label>
+      <div>
+        <button class="btn btn-outline-primary weekday-btn" data-weekday="SU">일</button>
+        <button class="btn btn-outline-primary weekday-btn" data-weekday="MO">월</button>
+        <button class="btn btn-outline-primary weekday-btn" data-weekday="TU">화</button>
+        <button class="btn btn-outline-primary weekday-btn" data-weekday="WE">수</button>
+        <button class="btn btn-outline-primary weekday-btn" data-weekday="TH">목</button>
+        <button class="btn btn-outline-primary weekday-btn" data-weekday="FR">금</button>
+        <button class="btn btn-outline-primary weekday-btn" data-weekday="SA">토</button>
+      </div>
+    </div>
+
+    <button id="submit-event" class="btn btn-success">이벤트 등록</button>
+  </div>
+</div>
+
+<script src="https://apis.google.com/js/api.js"></script>
+<script src="https://apis.google.com/js/platform.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+<script>
+  const CLIENT_ID = '583243799600-9q8v625h4r1r2i1r2p9rsv3gssoavvvj.apps.googleusercontent.com'; // 구글 API 클라이언트 ID
+  const API_KEY = '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'; // 구글 API 키
+  const SCOPES = 'https://www.googleapis.com/auth/calendar';
+
+  let authToken = '';
+
+  // Google API 로드
+  function loadClient() {
+    gapi.load('client:auth2', initClient);
+  }
+
+  function initClient() {
+    gapi.client.init({
+      apiKey: API_KEY,
+      clientId: CLIENT_ID,
+      discoveryDocs: ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"],
+      scope: SCOPES
+    }).then(() => {
+      const authInstance = gapi.auth2.getAuthInstance();
+      authInstance.isSignedIn.listen(handleAuthChange);
+      handleAuthChange(authInstance.isSignedIn.get());
+    });
+  }
+
+  function handleAuthChange(isSignedIn) {
+    if (isSignedIn) {
+      authToken = gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse().access_token;
+      $('#google-login').hide();
+      $('#google-logout').show();
+      $('#event-form').show();
+    } else {
+      authToken = '';
+      $('#google-login').show();
+      $('#google-logout').hide();
+      $('#event-form').hide();
+    }
+  }
+
+  $('#google-login').click(() => {
+    gapi.auth2.getAuthInstance().signIn();
+  });
+
+  $('#google-logout').click(() => {
+    gapi.auth2.getAuthInstance().signOut();
+  });
+
+  let selectedWeekdays = [];
+
+  // 요일 선택
+  $(document).on('click', '.weekday-btn', function() {
+    const weekday = $(this).data('weekday');
+    if (selectedWeekdays.includes(weekday)) {
+      selectedWeekdays = selectedWeekdays.filter(day => day !== weekday);
+      $(this).removeClass('active');
+    } else {
+      selectedWeekdays.push(weekday);
+      $(this).addClass('active');
+    }
+  });
+
+  $('#submit-event').click(() => {
+    const eventTitle = $('#event-title').val();
+    const startDate = $('#start-date').val();
+    const endDate = $('#end-date').val();
+
+    if (!eventTitle || !startDate || !endDate || selectedWeekdays.length === 0) {
+      alert('모든 필드를 채워주세요.');
+      return;
+    }
+
+    const events = selectedWeekdays.map(weekday => {
+      return {
+        summary: eventTitle,
+        start: {
+          dateTime: moment(startDate).toISOString(),
+          timeZone: 'Asia/Seoul',
+        },
+        end: {
+          dateTime: moment(endDate).toISOString(),
+          timeZone: 'Asia/Seoul',
+        },
+        recurrence: [{
+          freq: 'WEEKLY',
+          byDay: [weekday],
+          until: moment(endDate).add(1, 'day').toISOString(),
+        }],
+      };
+    });
+
+    events.forEach(event => createEvent(event));
+  });
+
+  function createEvent(event) {
+    gapi.client.calendar.events.insert({
+      calendarId: 'primary',
+      resource: event
+    }).then(response => {
+      alert('이벤트가 등록되었습니다.');
+    }).catch(error => {
+      console.error(error);
+      alert('이벤트 등록에 실패했습니다.');
+    });
+  }
+
+  // Google API 클라이언트 로드
+  loadClient();
+</script>
+
+</body>
+</html>

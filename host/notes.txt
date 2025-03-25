@@ -1,0 +1,15 @@
+아래의 기능이 있는 프폰트앤드 웹 앱을 짜줘.
+google caldendar 와 연동해서, 이벤트를 새로 등록하거나 수정하는 기능
+웹 인풋으로는 date picker 를 이용해서 시작일 마지막일을 선택하고,
+요일 picker 도 있어서 그 기간 중에 해당 선택 요일에만 이벤트를 새로 만들거나, 이미 존재하면 수정하는거야.
+이벤트의 제목을 입력할 수 있도록 해주고, 
+등록 버튼을 누르면 google caldendar에 이벤트를 새로 등록하거나 수정해줘.
+
+앱을 만들때, 안정된 JavaScript 라이브러리들을 사용해도 좋아. 
+CSS 는 bootstrip 과 같은 널리 사용되는 라이브러리를 이용해도 좋아 
+
+
+
+====> OAUTH - MJKO2000@gmail.com
+client id: 583243799600-9q8v625h4r1r2i1r2p9rsv3gssoavvvj.apps.googleusercontent.com
+secret: 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
