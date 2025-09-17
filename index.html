@@ -55,7 +55,10 @@
     }
     .emoji{margin-left:6px}
     
-    nav {margin-bottom: 10px;}
+    nav {
+      margin-bottom: 10px; 
+      text-align: right;
+    }
     nav a{margin-right:16px;text-decoration:none;color:#0366d6}
 
     /* Modern browsers — use aspect-ratio */
@@ -70,39 +73,7 @@
 <body>
   <div class="container">
     <div class="card" role="article" aria-label="예약 안내">
-    <nav>
-        <a href="index.html">홈</a>
-        <a href="https://blog.naver.com/mariya0" target="_blank" rel="noopener noreferrer">        
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 40 40">
-            <!-- 배경 말풍선 -->
-            <path d="M20 3C11.163 3 4 9.268 4 17c0 4.992 3.047 9.316 7.764 11.69L10 37l7.237-4.334C18.038 32.878 19.008 33 20 33c8.837 0 16-6.268 16-14S28.837 3 20 3z" fill="#03C75A"/>
-            <!-- 흰색 N -->
-            <path d="M15 12v16h4.2v-7.8L24 28h5V12h-4.2v7.8L19 12h-4z" fill="#fff"/>
-          </svg>
-          블로그
-        </a>
-        <a href="https://www.instagram.com/yaong_stay" target="_blank" rel="noopener noreferrer" aria-label="인스타그램">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-            <rect width="20" height="20" rx="6" fill="url(#grad)"/>
-            <path d="M12 8.5C10.07 8.5 8.5 10.07 8.5 12C8.5 13.93 10.07 15.5 12 15.5C13.93 15.5 15.5 13.93 15.5 12C15.5 10.07 13.93 8.5 12 8.5ZM12 14C11.17 14 10.5 13.33 10.5 12.5C10.5 11.67 11.17 11 12 11C12.83 11 13.5 11.67 13.5 12.5C13.5 13.33 12.83 14 12 14Z" fill="white"/>
-            <circle cx="16.5" cy="7.5" r="1.5" fill="white"/>
-            <defs>
-              <linearGradient id="grad" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
-                <stop stop-color="#F58529"/>
-                <stop offset="0.5" stop-color="#DD2A7B"/>
-                <stop offset="1" stop-color="#515BD4"/>
-              </linearGradient>
-            </defs>
-          </svg>
-          인스타그햄 야옹 스테이
-        </a>
-
-
-    </nav>        
-        <h1>가평 야옹이네 예약 안내
-
-            
-        </h1>
+        <h1>가평 야옹이네 예약 안내</h1>
 
       <p>안녕하세요.</p>
 
@@ -113,11 +84,16 @@
         그 중 원하시는 날짜와 인원을 문자로 알려주시면 됩니다. <br>
         
         <a href="sms:+821091261577" aria-label="문자 보내기">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-          <path d="M4 4h16c1.1 0 2 .9 2 2v10c0 1.1-.9 2-2 2H6l-4 4V6c0-1.1.9-2 2-2z" fill="#03C75A"/>
-          <path d="M7 9h10M7 13h7" stroke="white" stroke-width="2" stroke-linecap="round"/>
-        </svg>
-        010-9126-1577
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none">
+    <g transform="translate(0,5)">
+      <!-- Green chat bubble -->
+      <path d="M4 4h16c1.1 0 2 .9 2 2v10c0 1.1-.9 2-2 2H6l-4 4V6c0-1.1.9-2 2-2z" fill="#03C75A"/>
+      <!-- White text lines -->
+      <path d="M7 9h10M7 13h7" stroke="white" stroke-width="2" stroke-linecap="round"/>
+    </g>
+  </svg>
+
+            010-9126-1577
       </a>
 
       </p>
@@ -129,7 +105,36 @@
         <li>최대 <strong>2인 추가</strong> 가능합니다.</li>
       </ul>
 
-      <p><a href="">블로그</a></p>
+    <nav>
+        <a href="https://blog.naver.com/mariya0" target="_blank" rel="noopener noreferrer">        
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 40 40">
+    <g transform="translate(0,5)">
+      <!-- 배경 말풍선 -->
+      <path d="M20 3C11.163 3 4 9.268 4 17c0 4.992 3.047 9.316 7.764 11.69L10 37l7.237-4.334C18.038 32.878 19.008 33 20 33c8.837 0 16-6.268 16-14S28.837 3 20 3z" fill="#03C75A"/>
+      <!-- 흰색 N -->
+      <path d="M15 12v16h4.2v-7.8L24 28h5V12h-4.2v7.8L19 12h-4z" fill="#fff"/>
+    </g>
+  </svg>
+          블로그
+        </a>
+        <a href="https://www.instagram.com/yaong_stay" target="_blank" rel="noopener noreferrer" aria-label="인스타그램">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none">
+    <g transform="translate(0,5)">
+      <rect width="24" height="24" rx="6" fill="url(#grad)"/>
+      <path d="M12 8.5C10.07 8.5 8.5 10.07 8.5 12C8.5 13.93 10.07 15.5 12 15.5C13.93 15.5 15.5 13.93 15.5 12C15.5 10.07 13.93 8.5 12 8.5ZM12 14C11.17 14 10.5 13.33 10.5 12.5C10.5 11.67 11.17 11 12 11C12.83 11 13.5 11.67 13.5 12.5C13.5 13.33 12.83 14 12 14Z" fill="white"/>
+      <circle cx="16.5" cy="7.5" r="1.5" fill="white"/>
+    </g>
+    <defs>
+      <linearGradient id="grad" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#F58529"/>
+        <stop offset="0.5" stop-color="#DD2A7B"/>
+        <stop offset="1" stop-color="#515BD4"/>
+      </linearGradient>
+    </defs>
+  </svg>
+          야옹스테이 인스타
+        </a>
+    </nav>        
 
     </div>
   </div>
