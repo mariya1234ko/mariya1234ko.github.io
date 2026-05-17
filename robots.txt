@@ -1,2 +1,4 @@
 User-agent: *
 Allow: /
+
+https://mariya1234ko.github.io/sitemap.xml
